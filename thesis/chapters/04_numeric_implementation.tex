@@ -1,0 +1,34 @@
+% ============================================================================
+% CAPÍTULO 4 — IMPLEMENTACIÓN NUMÉRICA
+% Objetivo: describir el integrador propio y su validación.
+% Resultado que DEBE contener:
+%   · Arquitectura del código (spacetimes / shell / integrators / diagnostics).
+%   · El RK4 de paso fijo (escrito a mano, por control y por ser formativo).
+%   · El paso ADAPTATIVO por step-doubling: estimador de error local (~h^5),
+%     controlador h_new = h·S·(tol/err)^{1/(p+1)}, rechazo-y-repite.
+%     Motivación: en a>1 el ~99% de la dinámica está en el ~1% final cerca
+%     del horizonte; el paso fijo desperdicia pasos en la región lenta.
+%   · Validación: benchmark ExactParametric (a<1, a=1) y monitoreo de |C|.
+%     OJO: el estimador de error del stepper y |C| son controles INDEPENDIENTES.
+% CRITERIO DE ALCANCE: este capítulo justifica hacer o no el integrador a>1.
+%   Si tus claims (cap. 5) no necesitan resultados a>1, esto se acota o se
+%   reporta como limitación, no como bloqueante.
+% ============================================================================
+\chapter{Implementación numérica}
+\label{cap:numerico}
+
+\section{Arquitectura del simulador}
+% TODO: diagrama de módulos y flujo de datos (ShellParams -> Runner -> ...).
+
+\section{Integrador de Runge--Kutta de cuarto orden}
+% TODO: esquema RK4; por qué implementación propia (control, formación).
+
+\section{Paso adaptativo por duplicación de paso}
+\label{sec:adaptativo}
+% TODO: estimador de error local por step-doubling; controlador de paso;
+%   tolerancia mixta atol + rtol·|y| por componente.
+
+\section{Validación}
+% TODO: comparación contra ExactParametric; drift de |C| (métrica exterior,
+%   r>rs); por qué max_C_drift explota cerca de la singularidad (amplificación
+%   numérica de b/2R, no error del integrador).

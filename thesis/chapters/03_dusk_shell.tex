@@ -1,0 +1,43 @@
+% ============================================================================
+% CAPÍTULO 3 — CÁSCARA DE POLVO
+% Objetivo: especializar la ecuación general al caso polvo + Schwarzschild +
+%   Minkowski y caracterizar TODA la familia de soluciones.
+% Resultado que DEBE contener:
+%   · La forma cerrada Rdot^2 = (a + b/2R)^2 - 1 como CASO PARTICULAR de la
+%     ec. maestra (mostrar que sale de f_-=1, f_+=1-2M/R, m=b).
+%   · La cantidad conservada C y su interpretación.
+%   · Los tres regímenes (a<1, a=1, a>1) con R_max = b/(2(1-a)).
+%   · El potencial efectivo V(R) y el retrato de fase (FIGURA del mapa).
+%   · El locus black shell en el límite de polvo: a=1/2 (retorno en el horizonte)
+%     CON el caveat: Rddot<0 siempre => no es equilibrio, es retorno momentáneo.
+% Figura: initial_conditions_map.png (generada por code/).
+% ============================================================================
+\chapter{Colapso de una cáscara de polvo}
+\label{cap:polvo}
+
+\section{Ecuación de movimiento y cantidad conservada}
+\begin{equation}
+    \Cc \;\equiv\; 1 + \Rdot^2 - \left(a + \frac{b}{2R}\right)^2 \;=\; 0,
+    \qquad a \equiv \frac{M}{b}.
+    \label{eq:C}
+\end{equation}
+% TODO: derivar (\ref{eq:C}) desde (\ref{eq:maestra}); mostrar que es caso
+%   particular. Rddot = -(b/2R^2)(a + b/2R) < 0.
+
+\section{Los tres regímenes}
+% TODO: tabla a<1 / a=1 / a>1, con R_max = b/(2(1-a)) y su significado físico.
+
+\section{Potencial efectivo y retrato de fase}
+\label{sec:mapa}
+% TODO: V(R) = 1 - (a+b/2R)^2 ; región permitida/prohibida ; puntos de retorno.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=\textwidth]{initial_conditions_map.png}
+    \caption{Mapa de condiciones iniciales: retrato de fase $(R,\Rdot)$ y
+             potencial efectivo para la familia de $a$. Los tres regímenes de
+             Israel y el locus de black shell ($a=1/2$) en una sola vista.}
+    \label{fig:mapa}
+\end{figure}
+
+\section{La condición de black shell en el límite de polvo}
+% TODO: R_tp = r_s  =>  a = 1/2. Caveat de no-equilibrio (requiere presión).

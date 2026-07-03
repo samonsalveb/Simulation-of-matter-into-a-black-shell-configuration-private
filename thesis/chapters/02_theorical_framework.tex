@@ -1,0 +1,31 @@
+% ============================================================================
+% CAPÍTULO 2 — MARCO TEÓRICO
+% Objetivo: derivar la ecuación de movimiento de la cáscara desde el formalismo.
+% Resultado que DEBE contener:
+%   · Condiciones de empalme de Israel (salto de la curvatura extrínseca).
+%   · La ecuación maestra GENERAL en términos de f_±(R) — la fuente de verdad:
+%       sqrt(Rdot^2 + f_-) - sqrt(Rdot^2 + f_+) = m/R
+%   · La reducción a ODE para R(tau) via Birkhoff (por qué NO hace falta NR).
+% Nota de honestidad para vos: acá va la derivación con los índices cuidados
+%   (intrínseco vs. ambiente) — es donde históricamente aparecían los errores.
+% Refs: Israel 1966; Poisson §3.7-3.8.
+% ============================================================================
+\chapter{Marco teórico: condiciones de empalme de Israel}
+\label{cap:marco}
+
+\section{Cáscaras delgadas y curvatura extrínseca}
+% TODO: hipersuperficie tipo tiempo, n^mu espacelike, salto de K_ij.
+
+\section{Ecuación de movimiento general}
+\label{sec:eom-general}
+% La condición de empalme para una cáscara de masa en reposo m(R):
+\begin{equation}
+    \sqrt{\Rdot^2 + f_-(R)} \;-\; \sqrt{\Rdot^2 + f_+(R)} \;=\; \frac{m(R)}{R}.
+    \label{eq:maestra}
+\end{equation}
+% TODO: despejar Rdot^2 en general (resta de cuadrados) y comentar que este es
+%   el núcleo que consumen integrador, benchmark y mapa.
+
+\section{Reducción a una ecuación diferencial ordinaria}
+% TODO: teorema de Birkhoff fija la geometría a ambos lados -> problema = ODE
+%   para R(tau). Argumento explícito de por qué no se requiere NR 3+1.

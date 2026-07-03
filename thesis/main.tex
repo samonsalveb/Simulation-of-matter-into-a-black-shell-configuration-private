@@ -1,0 +1,76 @@
+% ============================================================================
+%  TESIS DE MAESTRÍA — Santiago Monsalve Bautista
+%  Observatorio Astronómico Nacional (OAN) — Universidad Nacional de Colombia
+%
+%  Compilación:   latexmk  (desde la carpeta thesis/)   ->  ver .latexmkrc
+%  Motor:         pdflatex + bibtex  (robusto, sin binarios extra)
+%
+%  NOTA IMPORTANTE sobre el formato:
+%  La UNAL tiene una plantilla oficial de tesis (biblioteca / SINAB). Antes de
+%  avanzar mucho, verificá con tu posgrado cuál es el formato vigente y, si
+%  corresponde, reemplazá este \documentclass por el de esa plantilla. Este
+%  esqueleto es genérico y funcional para empezar a escribir HOY; migrar el
+%  contenido a la plantilla oficial después es trivial (los \chapter no cambian).
+% ============================================================================
+\documentclass[11pt,a4paper,oneside]{report}
+
+% --- Codificación e idioma -------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noquoting]{babel}
+
+% --- Matemática ------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}            % negritas matemáticas (vectores/tensores)
+
+% --- Figuras ---------------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{../figures/}}   % figuras generadas por code/ viven acá
+\usepackage{float}
+
+% --- Bibliografía (natbib + bibtex: compila en cualquier lado) -------------
+\usepackage[numbers,sort&compress]{natbib}
+\bibliographystyle{unsrtnat}
+
+% --- Márgenes y enlaces (hyperref SIEMPRE al final) ------------------------
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+% --- Comandos propios (agregá los tuyos acá) -------------------------------
+\newcommand{\Rdot}{\dot{R}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\rs}{r_{s}}
+\renewcommand{\d}{\mathrm{d}}
+
+% ============================================================================
+\title{Simulación del colapso gravitacional de una cáscara de materia\\
+       hacia una configuración de \emph{Black Shell}}
+\author{Santiago Monsalve Bautista}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% --- Frontmatter -----------------------------------------------------------
+\input{chapters/00_resumen}
+
+\tableofcontents
+
+% --- Cuerpo ----------------------------------------------------------------
+\input{chapters/01_introduction}
+\input{chapters/02_marco_teorico}
+\input{chapters/03_cascara_polvo}
+\input{chapters/04_implementacion_numerica}
+\input{chapters/05_resultados}
+\input{chapters/06_extensiones}
+\input{chapters/07_conclusiones}
+
+% --- Apéndices -------------------------------------------------------------
+\appendix
+\input{chapters/A_apendice}
+
+% --- Bibliografía ----------------------------------------------------------
+\bibliography{references}
+
+\end{document}

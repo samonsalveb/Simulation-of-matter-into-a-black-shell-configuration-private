@@ -1,0 +1,54 @@
+# ============================================================================
+# .gitignore — LaTeX + Python
+# Regla general: no se versionan artefactos de build (auxiliares, PDF, cachés).
+# El PDF final va como adjunto de un Release/tag, no en el árbol de fuentes.
+# ============================================================================
+
+# ---- LaTeX (auxiliares) ----
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.idx
+*.ilg
+*.ind
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.xdy
+build/
+
+# ---- PDF compilado (artefacto de build) ----
+thesis/main.pdf
+main.pdf
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json   # si querés versionar settings compartidos, permitilo
