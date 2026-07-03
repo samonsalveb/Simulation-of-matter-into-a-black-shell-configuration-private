@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Colapso gravitacional de una cáscara delgada → Black Shell
 
 Tesis de maestría — Santiago Monsalve Bautista
