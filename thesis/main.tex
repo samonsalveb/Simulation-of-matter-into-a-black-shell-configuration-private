@@ -1,5 +1,5 @@
 % ============================================================================
-%  TESIS DE MAESTRÍA — Santiago Monsalve Bautista
+%  MASTER THESIS — Santiago Monsalve Bautista
 %  Observatorio Astronómico Nacional (OAN) — Universidad Nacional de Colombia
 %
 %  Compilación:   latexmk  (desde la carpeta thesis/)   ->  ver .latexmkrc
@@ -18,7 +18,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-noquoting]{babel}
-
+ 
 % --- Matemática ------------------------------------------------------------
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{bm}            % negritas matemáticas (vectores/tensores)
@@ -43,8 +43,7 @@
 \renewcommand{\d}{\mathrm{d}}
 
 % ============================================================================
-\title{Simulación del colapso gravitacional de una cáscara de materia\\
-       hacia una configuración de \emph{Black Shell}}
+\title{Simulation of matter into a \textit{Black Shell} configuration}
 \author{Santiago Monsalve Bautista}
 \date{\today}
 
@@ -53,18 +52,18 @@
 \maketitle
 
 % --- Frontmatter -----------------------------------------------------------
-\input{chapters/00_resumen}
+\input{chapters/00_abstract}
 
 \tableofcontents
 
 % --- Cuerpo ----------------------------------------------------------------
 \input{chapters/01_introduction}
-\input{chapters/02_marco_teorico}
-\input{chapters/03_cascara_polvo}
-\input{chapters/04_implementacion_numerica}
-\input{chapters/05_resultados}
-\input{chapters/06_extensiones}
-\input{chapters/07_conclusiones}
+\input{chapters/02_theorical_framework}
+\input{chapters/03_dusk_shell}
+\input{chapters/04_numeric_implementation}
+\input{chapters/05_results}
+\input{chapters/06_extensions}
+\input{chapters/07_conclusions}
 
 % --- Apéndices -------------------------------------------------------------
 \appendix
