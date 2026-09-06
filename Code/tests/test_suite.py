@@ -291,14 +291,16 @@ class TestAnalyticSolution:
         result = solver.compute()
         assert np.all(result.Rdot <= 0), "Ṙ positivo en régimen a=1"
 
-    def test_negative_binding_lanza_error(self, params_negative):
+    def test_negative_binding_conservacion_C(self, params_negative):
         exterior = Schwarzschild(M=params_negative.M)
         interior = Minkowski()
         matter   = DustShell(M=params_negative.M, R0=100.0 * params_negative.rs)
         eom      = ShellEOM(exterior=exterior, interior=interior,
-                            matter=matter, M=params_negative.M, b=params_negative.b)
-        with pytest.raises(NotImplementedError, match="negative_binding"):
-            AnalyticSolution(eom=eom, params=params_negative)
+                        matter=matter, M=params_negative.M, b=params_negative.b)
+
+        result = AnalyticSolution(eom=eom, params=params_negative).compute()
+
+        assert result.max_C_drift < 1e-10   # tolerancia documentada en §8 para la solución analítica
 
     def test_resultado_es_IntegratorResult(self, eom_positive, params_positive):
         solver = AnalyticSolution(eom=eom_positive, params=params_positive)
@@ -394,9 +396,11 @@ class TestRunner:
         bench = ShellRunner(params_positive).get_analytic_benchmark()
         assert isinstance(bench, IntegratorResult)
 
-    def test_get_analytic_benchmark_negative_lanza_error(self, params_negative):
-        with pytest.raises(NotImplementedError):
-            ShellRunner(params_negative).get_analytic_benchmark()
+    def test_get_analytic_benchmark_negative_devuelve_resultado(self, params_negative):
+        result = ShellRunner(params_negative).get_analytic_benchmark()
+
+        assert isinstance(result, IntegratorResult)   # mismo patrón que test_resultado_es_IntegratorResult
+        assert result.max_C_drift < 1e-10
 
     def test_validate_passed_con_rk45(self, params_positive):
         runner = ShellRunner(params_positive)
@@ -404,7 +408,7 @@ class TestRunner:
         report = runner.validate(result, tol_R=1e-4, tol_C=1e-6)
         assert report.passed, report.summary()
 
-    def test_validate_sin_solapamiento_lanza_error(self, params_positive):
+    def test_validate_sin_solapamiento_devuelve_resultado(self, params_positive):
         """Si las trayectorias no se solapan en τ, debe lanzar ValueError."""
         runner = ShellRunner(params_positive)
         result = runner.run()
@@ -443,3 +447,8 @@ class TestRunner:
     def test_R0_igual_R_max(self, params_positive):
         result = ShellRunner(params_positive).run()
         assert result.R[0] == pytest.approx(params_positive.R_max, rel=1e-6)
+
+    def test_negative_binding_run_advierte_override_integrador(self, params_negative):
+        with pytest.warns(UserWarning, match="RK4"):
+            result = ShellRunner(params_negative).run()
+        assert isinstance(result, IntegratorResult)

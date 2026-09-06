@@ -17,6 +17,7 @@ Benchmark analítico (solo a < 1 y a = 1):
 from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
+import warnings 
 
 from .config import ShellParams
 from .spacetimes.schwarzschild import Schwarzschild
@@ -149,11 +150,21 @@ class ShellRunner:
             tau_ff_actual = np.pi * np.sqrt((10.0 * p.rs)**3 / (8.0 * p.M))
             msf_new = h_target / tau_ff_actual
             patched = replace(p, max_step_fraction=msf_new)
-            from Code.integrators.rk4_integrator import RK4Integrator
+            from Code.integrators.rk4_integrator import RK4Integrator # type: ignore
+
+            if p.integrator != "rk4":
+                warnings.warn(
+                    f"ShellRunner.run(): régimen negative_binding (a={p.a:.4f} > 1) "
+                    f"fuerza RK4Integrator; se ignora params.integrator='{p.integrator}'.",
+                    UserWarning,
+                    stacklevel=2,
+                )
+
             integrator_tmp = RK4Integrator(eom=self.eom, params=patched)
             return integrator_tmp.integrate(y0=y0, tau_span=tau_span)
 
         return self.integrator.integrate(y0=y0, tau_span=tau_span)
+
         # ── Benchmark analítico ───────────────────────────────────────────────────
 
     def get_analytic_benchmark(self) -> IntegratorResult:
