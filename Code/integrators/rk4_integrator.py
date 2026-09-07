@@ -60,15 +60,23 @@ class RK4Integrator(Integrator):
                 frac = (rs - y[0]) / (y_next[0] - y[0])
                 horizon_crossing_tau = (tau - h) + frac * h
 
-            y = y_next
+            y = y_next  #
             R = y[0]
 
             if R <= 0.0 or R < R_stop:
                 message = (
-                    f"Detenido antes de la singularidad "
+                    f"Stop before the singularity "
                     f"(R={R:.4f} < R_stop={R_stop:.4f})."
                 )
                 break
+
+            if self.monitor is not None and R > rs:
+                try:
+                    self.monitor.check(tau, y)
+                except RuntimeError as e:
+                    success = False
+                    message = str(e)
+                    break
 
             tau_list.append(tau)
             R_list.append(y[0])

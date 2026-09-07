@@ -99,9 +99,10 @@ class IntegratorResult:
 
 class Integrator(ABC):
 
-    def __init__(self, eom, params) -> None:
-        self.eom    = eom
-        self.params = params
+    def __init__(self, eom, params, monitor=None) -> None:
+        self.eom     = eom
+        self.params  = params
+        self.monitor = monitor
 
     @abstractmethod
     def integrate(self, y0: np.ndarray, tau_span: tuple) -> IntegratorResult:

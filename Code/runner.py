@@ -107,9 +107,9 @@ class ShellRunner:
             b=p.b,
         )
 
-        self.integrator = _INTEGRATORS[p.integrator](eom=self.eom, params=p)
         self.monitor    = ConservationMonitor(eom=self.eom)
-    
+        self.integrator = _INTEGRATORS[p.integrator](eom=self.eom, params=p, monitor=self.monitor)
+
     
     def run(self) -> IntegratorResult:
         p = self.params
@@ -160,7 +160,7 @@ class ShellRunner:
                     stacklevel=2,
                 )
 
-            integrator_tmp = RK4Integrator(eom=self.eom, params=patched)
+            integrator_tmp = RK4Integrator(eom=self.eom, params=patched, monitor=self.monitor)
             return integrator_tmp.integrate(y0=y0, tau_span=tau_span)
 
         return self.integrator.integrate(y0=y0, tau_span=tau_span)

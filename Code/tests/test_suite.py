@@ -37,6 +37,8 @@ from Code.shell.equations import ShellEOM
 from Code.shell.dust import DustShell
 from Code.benchmarks.analytic_solution import AnalyticSolution
 from Code.integrators.base import IntegratorResult
+from Code.diagnostics.monitor import ConservationMonitor
+from Code.integrators.rk4_integrator import RK4Integrator
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -363,6 +365,27 @@ class TestIntegrators:
         result = ShellRunner(p).run()
         assert result.max_C_drift_exterior < 1e-5, \
             f"RK4 max|C| exterior = {result.max_C_drift_exterior:.3e}"
+
+    def test_rk4_monitor_aborta_si_C_excede_stop_threshold(self):
+        """Si el monitor detecta |C| > stop_threshold en la región exterior,
+        RK4Integrator debe terminar con success=False, no propagar la excepción."""
+        p = ShellParams(M=1.0, b=3.0, integrator="rk4",
+                     max_step_fraction=1e-4).validate()
+        exterior = Schwarzschild(M=p.M)
+        interior = Minkowski()
+        matter   = DustShell(M=p.M, R0=p.R_max)
+        eom      = ShellEOM(exterior=exterior, interior=interior,
+                        matter=matter, M=p.M, b=p.b)
+
+        # Umbral absurdamente estricto: cualquier |C|>0 lo dispara de inmediato.
+        monitor    = ConservationMonitor(eom=eom, warn_threshold=1e-20, stop_threshold=1e-20)
+        integrator = RK4Integrator(eom=eom, params=p, monitor=monitor)
+
+        y0     = eom.initial_state(R0=p.R_max, Rdot0=0.0)
+        result = integrator.integrate(y0=y0, tau_span=(0.0, 1.5 * p.tau_ff))
+
+        assert result.success is False
+        assert "ConservationMonitor" in result.message
 
     # ── DOP853 ────────────────────────────────────────────────────────────────
 

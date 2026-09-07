@@ -5,8 +5,8 @@ Soluciones paramétricas exactas de Israel (1967), Tabla I.
 
 Caso 1 — a < 1: IMPLEMENTADO y verificado.
 Caso 2 — a = 1: IMPLEMENTADO y verificado.
-Caso 3 — a > 1: IMPLIMENTADO y verificado.
-caso 4 — a → ∞: NO IMPLEMENTADO (límite singular, no es un shell de polvo).
+Caso 3 — a > 1: IMPLEMENTADO y verificado.
+caso 4 — a → ∞: IMPLEMENTADO (límite singular, no es un shell de polvo).
 
 NO hereda de Integrator. No recibe ODE. El método público es compute(),
 no integrate(y0, tau_span). Devuelve IntegratorResult para compatibilidad
