@@ -17,7 +17,7 @@ a caracterizar configuraciones de *black shell* cerca del horizonte.
 │   ├── references.bib
 │   ├── chapters/    # un archivo por capítulo (con notas de alcance)
 │   └── .latexmkrc
-├── code/            # paquete Python del simulador (mové acá tu Code/)
+├── Code/            # paquete Python del simulador 
 ├── figures/         # figuras generadas por el código, usadas por la tesis
 ├── .gitignore
 └── README.md
